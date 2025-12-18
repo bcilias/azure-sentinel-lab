@@ -138,3 +138,8 @@ The main objectives are:
 
 ---
 
+## Conclusion
+
+This project demonstrates how quickly an Internet-exposed host starts receiving real-world attacks, and how to turn that noise into actionable visibility with **Microsoft Sentinel**. By centralizing Windows security logs in **Log Analytics**, focusing on **Event ID 4625**, enriching attacker IPs with a **GeoIP Watchlist**, and visualizing the results in a **Workbook**, I built a simple SOC-style view of global brute-force activity.
+
+Next steps would be to add **analytic rules** to automatically create incidents, apply **alert tuning** (thresholds/suppression), and define **response actions** (automation/playbooks) to move from observation to detection and response.
