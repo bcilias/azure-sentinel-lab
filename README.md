@@ -60,9 +60,16 @@ The main objectives are:
 
 ## Project steps
 
-### 1. Create Virtual Machine
+### Step 1 — Deploy the honeypot VM (Azure baseline)
 
-""
+- Create a dedicated **Resource Group** (lab container) in the target region (e.g., **France Central**).
+  > ![Resource Group created](images/step1-resource-group.png)
+
+- Deploy the **Windows VM** (honeypot) with a **Public IP** inside a **VNet**.
+  > ![VM + networking resources](images/step1-resources.png)
+
+- Expose the VM on purpose by configuring the **NSG inbound rules** to allow Internet traffic (lab design).
+  > ![NSG inbound rules (intentional exposure)](images/step1-nsg-inbound.png)
 
 ---
 
