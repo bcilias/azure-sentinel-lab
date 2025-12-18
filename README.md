@@ -16,7 +16,7 @@ The main objectives are:
 ## Tools used
 
 - Microsoft Azure (Resource Group, VNet, VM)
-- Windows Server / Windows VM (honeypot target)
+- Windows 10 VM (honeypot target)
 - Network Security Group (NSG) *(intentionally disabled for the lab)*
 - Windows Defender Firewall *(intentionally disabled on the VM for the lab)*
 - Log Analytics Workspace (LAW)
@@ -60,22 +60,31 @@ The main objectives are:
 
 ## Project steps
 
-### Step 1 — Deploy the honeypot VM (Azure baseline)
+### Step 1 — Azure baseline (honeypot VM + Internet exposure)
 
-- Create a dedicated **Resource Group** (lab container) in the target region (e.g., **France Central**).
+- Lab resources were grouped in a dedicated **Resource Group** (France Central).
   > ![Resource Group created](images/step1-resource-group.png)
 
-- Deploy the **Windows VM** (honeypot) with a **Public IP** inside a **VNet**.
+- A **Windows VM** was deployed as the honeypot, with its core networking components (**VNet**, **NIC**, **Public IP**) in place.
   > ![VM + networking resources](images/step1-resources.png)
 
-- Expose the VM on purpose by configuring the **NSG inbound rules** to allow Internet traffic (lab design).
+- The VM was intentionally made reachable from the Internet by relaxing the **NSG inbound rules** (honeypot design choice).
   > ![NSG inbound rules (intentional exposure)](images/step1-nsg-inbound.png)
 
 ---
 
-### 2. Configuring Log Analytics Workspace
+### Step 2 — Increase exposure at OS level (Windows Firewall)
 
-""
+- RDP access confirmed using the local admin account created during deployment.
+- Baseline check: **ping was blocked** initially (default Windows Firewall behavior).
+  > ![Ping blocked before disabling firewall](images/step2-ping-blocked.png)
+
+- Windows Defender Firewall was then **disabled for all profiles** (Domain / Private / Public) to maximize honeypot exposure.
+  > ![Windows Firewall enabled (default)](images/step2-firewall-enabled.png)  
+  > ![Windows Firewall disabled (all profiles)](images/step2-firewall-disabled.png)
+
+- Result: **ping succeeds** after disabling the firewall, confirming the VM is reachable end-to-end from the Internet side.
+  > ![Ping succeeds after disabling firewall](images/step2-ping-success.png)
 
 ---
 
