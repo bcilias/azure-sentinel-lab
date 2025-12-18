@@ -104,9 +104,20 @@ The main objectives are:
 
 ---
 
-### 4. Querying failed login attempts and visualizing attack sources
+### Step 4 — Centralize Windows security logs (LAW + AMA + Sentinel connector)
 
-""
+- A dedicated **Log Analytics Workspace (LAW)** was created to act as the central log repository for the lab.
+  > ![Log Analytics Workspace created](images/step4-law-created.png)
+
+- In **Microsoft Sentinel**, I enabled the **Windows Security Events** content and selected the **Windows Security Events via AMA** connector.
+  > ![Sentinel Content hub – Windows Security Events](images/step4-sentinel-content-hub-wse.png)  
+  > ![Windows Security Events via AMA selected](images/step4-wse-via-ama-connector.png)
+
+- A **Data Collection Rule (DCR)** was configured to onboard the honeypot VM and collect Windows events (lab scope set to **AllEvents** for maximum telemetry).
+  > ![DCR Wizard – Review + create](images/step4-dcr-wizard.png)
+
+- On the VM side, the **Azure Monitor Agent** is visible as an installed extension, confirming the VM is ready to ship logs to LAW/Sentinel.
+  > ![Azure Monitor Agent installed (VM extension)](images/step4-ama-extension.png)
 
 ---
 
