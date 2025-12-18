@@ -88,9 +88,19 @@ The main objectives are:
 
 ---
 
-### 3. Forwarding logs and integrating with Sentinel
+### Step 3 — Generate logon telemetry (RDP failures → Event ID 4625)
 
-""
+- To produce realistic security logs, I triggered multiple **failed RDP sign-in attempts** using random credentials.
+  > ![Failed RDP logon attempt](images/step3-rdp-failed.png)
+
+- On the VM, these attempts immediately appear in **Event Viewer → Windows Logs → Security** as **Audit Failure** events (**Event ID 4625**).
+  > ![Security log showing 4625 events](images/step3-eventviewer-4625-list.png)
+
+- I filtered the Security log specifically on **4625** to focus only on failed logons.
+  > ![Filtering Security log on 4625](images/step3-eventviewer-filter-4625.png)
+
+- Each event contains the key fields I’ll later use in Sentinel: **Account Name** (attempted user) and **Source Network Address** (attacker IP).
+  > ![4625 event details (username + source IP)](images/step3-4625-details.png)
 
 ---
 
