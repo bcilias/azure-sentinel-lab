@@ -121,9 +121,20 @@ The main objectives are:
 
 ---
 
-### 5. Building an attack map to track real-time hacker activity
+### Step 5 — GeoIP enrichment + attack map (Watchlist + KQL Workbook)
 
-""
+- Once ingestion was active, **SecurityEvent** started filling up quickly with **4625** failed logons from multiple source IPs.
+  > ![SecurityEvent logs in Sentinel](images/step5-securityevent-logs.png)  
+  > ![Large volume of results](images/step5-securityevent-volume.png)
+
+- To turn raw IPs into something readable, I imported a **GeoIP Watchlist** into Sentinel (a large spreadsheet mapping **IP ranges → city/country/latitude/longitude**).  
+  The Workbook query enriches events using `ipv4_lookup()` and summarizes failures per location.
+
+- Final output: a **Sentinel Workbook map** showing the geographic origin and volume of failed logons.
+  > ![Workbook query (advanced editor)](images/step5-workbook-query.png)  
+  > ![Sentinel Workbook – world attack map](images/step5-world-attack-map.png)
+
+- The **Workbook item JSON** used for the map is available in the project’s additional files: `additional-files/workbook-attack-map.json`.
 
 ---
 
